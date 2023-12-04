@@ -1,0 +1,40 @@
+name:
+  from: "package.json"
+
+version:
+  from: "package.json"
+
+chartVersion:
+  from: "charts/Chart.yaml"
+
+publication:
+  container:
+    registry: "docker"
+    organisation: "slig2008"
+    image: "$REGISTRY_URL/$REGISTRY_ORGANISATION/$NAME:$VERSION"
+
+  chart:
+    registryType: "git-repository"
+    registry:
+      repository:
+        host: "github"
+        owner: "slig2008"
+        name: "helm-charts-public"
+      branch: "master"
+      path: "$NAME"
+
+  git:
+    repository:
+      host: "internal"
+      owner: "slig2008"
+      name: "will-fail-for-now"
+    branch: "master"
+    updates:
+      - directory: "applications/$NAME"
+        file: "Chart.yaml"
+        path: ".dependencies[0].version"
+        value: "$CHART_VERSION-$CHART_DIGEST"
+      - directory: "applications/$NAME"
+        file: "values.yaml"
+        path: ".acme-lega-httpreq-selfhostde.image"
+        value: "$IMAGE@$IMAGE_DIGEST"
