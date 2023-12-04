@@ -1,0 +1,9 @@
+**/.dockerignore
+**/.git
+**/.gitignore
+**/.vscode
+**/.devcontainer
+**/charts
+**/Dockerfile*
+**/node_modules
+.tekton

@@ -1,0 +1,5 @@
+apiVersion: v2
+name: acme-lego-httpreq-selfhostde
+description: Forward dns-01 challenge from acme lego client to selfhost.de
+type: application
+version: 0.1.0

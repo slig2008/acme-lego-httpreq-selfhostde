@@ -1,0 +1,50 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Release.Name }}
+          image: {{ .Values.image }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          env:
+            - name: ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ if include "nullOrEmpty" (list .Values.secrets "existingSecret") }}{{ .Release.Name }}-credentials{{ else }}{{ get .Values.secrets "existingSecret" }}{{ end }}
+                  key: adminUser
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ if include "nullOrEmpty" (list .Values.secrets "existingSecret") }}{{ .Release.Name }}-credentials{{ else }}{{ get .Values.secrets "existingSecret" }}{{ end }}
+                  key: adminPassword
+            - name: SELFHOSTDE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ if include "nullOrEmpty" (list .Values.secrets "existingSecret") }}{{ .Release.Name }}-credentials{{ else }}{{ get .Values.secrets "existingSecret" }}{{ end }}
+                  key: selfhostdeUser
+            - name: SELFHOSTDE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ if include "nullOrEmpty" (list .Values.secrets "existingSecret") }}{{ .Release.Name }}-credentials{{ else }}{{ get .Values.secrets "existingSecret" }}{{ end }}
+                  key: selfhostdePassword
+            - name: SELFHOSTDE_TXTRECORDID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ if include "nullOrEmpty" (list .Values.secrets "existingSecret") }}{{ .Release.Name }}-credentials{{ else }}{{ get .Values.secrets "existingSecret" }}{{ end }}
+                  key: selfhostdeRecordId

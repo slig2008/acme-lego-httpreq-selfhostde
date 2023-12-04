@@ -1,0 +1,24 @@
+{
+  "name": "acme-lego-httpreq-selfhostde",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "node ./bin/www",
+    "start:dev": "SELFHOSTDE_USER=user SELFHOSTDE_PASSWORD=password SELFHOSTDE_TXTRECORDID=1234 nodemon --legacy-watch --inspect ./bin/www"
+  },
+  "bin": {
+    "healthcheck": "./bin/healthcheck.mjs"
+  },
+  "author": "slig@online.ms",
+  "license": "MIT",
+  "dependencies": {
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "express": "^4.18.2",
+    "express-basic-auth": "^1.2.1",
+    "morgan": "~1.9.1",
+    "node-fetch": "^3.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.2"
+  }
+}

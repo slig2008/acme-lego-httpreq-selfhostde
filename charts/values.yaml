@@ -1,0 +1,9 @@
+image: "slig2008/acme-lego-httpreq-selfhostde:latest"
+
+secrets:
+  existingSecret:
+  adminUser:
+  adminPassword:
+  selfhostdeUser:
+  selfhostdePassword:
+  selfhostdeRecordId:
