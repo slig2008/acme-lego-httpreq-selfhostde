@@ -10,7 +10,7 @@ if (!user || !password || !recordId) {
 }
 
 function updateSelfhost(content) { return new Promise((resolve, reject) => {
-  let url = `https://selfhost.de/cgi-bin/api.pl?username=${user}&password=${password}&rid=${recordId}&content=${content}`
+  let url = `https://account.selfhost.de/cgi-bin/api.pl?username=${user}&password=${password}&rid=${recordId}&content=${content}`
   fetch(url)
     .then(response => response.text())
     .then(result => {
